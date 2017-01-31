@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TodoForm from './components/todo/TodoForm';
+import List from './components/todo/List';
 
 class App extends Component {
   constructor() {
@@ -10,9 +12,18 @@ class App extends Component {
         { id: 1, name: 'important thing', isComplete: false },
         { id: 2, name: 'important thing', isComplete: true },
         { id: 3, name: 'important thing', isComplete: false },
-      ]
+      ],
+      currentTodo: '',
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  handleInputChange(e) {
+    this.setState({
+      currentTodo: e.target.value
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -21,16 +32,9 @@ class App extends Component {
           <h2>React To Do</h2>
         </div>
         <div className="Todo-App">
-          <form>
-            <input type="text" placeholder="enter to do item"/>
-          </form>
-          <div className="Todo-List">
-            <ul>
-              {this.state.todos.map(todo => {
-                return <li key={todo.id}><input type="checkbox" checked={todo.isComplete} />{todo.name}</li>
-              })}
-            </ul>
-          </div>
+          <TodoForm handleInputChange={this.handleInputChange}
+            currentTodo={this.state.currentTodo}/>
+            <List todos={this.state.todos} />
         </div>
       </div>
     );
