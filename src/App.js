@@ -3,18 +3,25 @@ import logo from './logo.svg';
 import './App.css';
 import TodoForm from './components/todo/TodoForm';
 import List from './components/todo/List';
-import {addTodo, randomNumGenerator} from './lib/todoHelpers'
+import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo} from './lib/todoHelpers'
 
 class App extends Component {
   state = {
     todos: [
       { id: 1, name: 'important thing', isComplete: false },
-      { id: 2, name: 'important thing', isComplete: true },
+      { id: 2, name: 'important thing', isComplete: false },
       { id: 3, name: 'important thing', isComplete: false },
     ],
     currentTodo: '',
     errorMessage: '',
   };
+
+  handleTogle = (id) => {
+    const todo = findById(id, this.state.todos);
+    const toggled = toggleTodo(todo);
+    const updatedTodos = updateTodo(this.state.todos, toggled);
+    this.setState({todos: updatedTodos});
+  }
 
   handleInputChange = (e) => {
     this.setState({
@@ -55,7 +62,7 @@ class App extends Component {
           <TodoForm handleInputChange={this.handleInputChange}
             handleSubmit={submitHandler}
             currentTodo={this.state.currentTodo}/>
-            <List todos={this.state.todos} />
+            <List todos={this.state.todos} handleTogle={this.handleTogle}/>
         </div>
       </div>
     );
