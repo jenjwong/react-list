@@ -12,6 +12,7 @@
   height: 150px;
   padding: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
 .App-intro {
@@ -26,11 +27,26 @@ ul {
 
 li {
   padding: 2%;
+  list-style-type: none;
 }
 
 .error {
   color: red;
 }
+
+li span.delete-item {
+  visibility: hidden;
+}
+
+span.delete-item a {
+  text-decoration: none;
+  color:red;
+}
+
+li:hover span.delete-item {
+  visibility:
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
