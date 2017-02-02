@@ -1,18 +1,18 @@
 import React from 'react';
-import ListItem from './ListItem'
+import ListItem from './ListItem';
 
-const List = (props) => {
+const List = ({ id, todos, handleTogle }) => {
   return (
     <div>
       <ul>
-        {props.todos.map(todo => <ListItem key={todo.id} todo={todo} />)}
+        {todos.map(todo => <ListItem key={todo.id} todo={todo} handleTogle={handleTogle} />)}
       </ul>
     </div>
-  )
+  );
 };
 
 List.propTypes = {
   todos: React.PropTypes.array,
-}
+};
 
 export default List;
