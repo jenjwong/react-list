@@ -4,6 +4,7 @@ import './App.css';
 import TodoForm from './components/todo/TodoForm';
 import List from './components/todo/List';
 import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo} from './lib/todoHelpers'
+import { partial, pipe } from './lib/utils';
 
 class App extends Component {
   state = {
@@ -17,9 +18,8 @@ class App extends Component {
   };
 
   handleTogle = (id) => {
-    const todo = findById(id, this.state.todos);
-    const toggled = toggleTodo(todo);
-    const updatedTodos = updateTodo(this.state.todos, toggled);
+    const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, this.state.todos))
+    const updatedTodos = getUpdatedTodos(id, this.state.todos);
     this.setState({todos: updatedTodos});
   }
 
