@@ -3,8 +3,10 @@ import { partial } from '../../lib/utils';
 
 const ListItem = (props) => {
   const handleTogle = partial(props.handleTogle, props.todo.id);
+  const handleRemove = partial(props.handleRemove, props.todo.id);
   return (
     <li>
+      <span className="delete-item"><a href="#" onClick={handleRemove}>X</a></span>
       <input
         type="checkbox"
         checked={props.todo.isComplete}

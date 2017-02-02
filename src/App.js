@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import TodoForm from './components/todo/TodoForm';
 import List from './components/todo/List';
-import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo} from './lib/todoHelpers'
+import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo, removeTodo} from './lib/todoHelpers'
 import { partial, pipe } from './lib/utils';
 
 class App extends Component {
@@ -16,6 +16,12 @@ class App extends Component {
     currentTodo: '',
     errorMessage: '',
   };
+
+  handleRemove = (id, e) => {
+    e.preventDefault();
+    const updatedTodos = removeTodo(this.state.todos, id);
+    this.setState({todos: updatedTodos});
+  }
 
   handleTogle = (id) => {
     const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, this.state.todos))
@@ -59,10 +65,16 @@ class App extends Component {
         </div>
         {this.state.errorMessage && <span className='error'>{this.state.errorMessage}</span>}
         <div className="Todo-App">
-          <TodoForm handleInputChange={this.handleInputChange}
+          <TodoForm
+            handleInputChange={this.handleInputChange}
             handleSubmit={submitHandler}
-            currentTodo={this.state.currentTodo}/>
-            <List todos={this.state.todos} handleTogle={this.handleTogle}/>
+            currentTodo={this.state.currentTodo}
+          />
+            <List
+              todos={this.state.todos}
+              handleTogle={this.handleTogle}
+              handleRemove={this.handleRemove}
+            />
         </div>
       </div>
     );
