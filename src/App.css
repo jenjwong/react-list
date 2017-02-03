@@ -19,6 +19,10 @@
   font-size: large;
 }
 
+a {
+  text-decoration: none;
+}
+
 ul {
   list-style: none;
   margin: 0;
@@ -47,6 +51,9 @@ li:hover span.delete-item {
   visibility:
 }
 
+.footer {
+  padding: 20px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
