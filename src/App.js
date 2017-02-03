@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import TodoForm from './components/todo/TodoForm';
 import List from './components/todo/List';
+import Footer from './components/todo/Footer';
 import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo, removeTodo} from './lib/todoHelpers'
 import { partial, pipe } from './lib/utils';
 
@@ -75,6 +76,7 @@ class App extends Component {
               handleTogle={this.handleTogle}
               handleRemove={this.handleRemove}
             />
+          <Footer />
         </div>
       </div>
     );
