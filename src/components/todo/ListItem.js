@@ -6,7 +6,7 @@ const ListItem = (props) => {
   const handleRemove = partial(props.handleRemove, props.todo.id);
   return (
     <li>
-      <span className="delete-item"><a href="#" onClick={handleRemove}>X</a></span>
+      <span className="delete-item"><a href="#" onClick={handleRemove}>XXXXXX</a></span>
       <input
         type="checkbox"
         checked={props.todo.isComplete}
