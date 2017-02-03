@@ -51,8 +51,12 @@ li:hover span.delete-item {
   visibility:
 }
 
-.footer {
+.footer a {
   padding: 20px;
+}
+
+.footer a.active {
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {

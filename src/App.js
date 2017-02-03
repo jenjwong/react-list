@@ -4,19 +4,19 @@ import './App.css';
 import TodoForm from './components/todo/TodoForm';
 import List from './components/todo/List';
 import Footer from './components/todo/Footer';
-import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo, removeTodo} from './lib/todoHelpers'
+import {addTodo, randomNumGenerator, findById, toggleTodo, updateTodo, removeTodo, filterTodos} from './lib/todoHelpers'
 import { partial, pipe } from './lib/utils';
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 1, name: 'important thing', isComplete: false },
-      { id: 2, name: 'important thing', isComplete: false },
-      { id: 3, name: 'important thing', isComplete: false },
-    ],
+    todos: [],
     currentTodo: '',
     errorMessage: '',
   };
+
+  static contextTypes = {
+    route: React.PropTypes.string
+  }
 
   handleRemove = (id, e) => {
     e.preventDefault();
@@ -58,6 +58,7 @@ class App extends Component {
 
   render() {
     const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
+    const displayTodos = filterTodos(this.state.todos, this.context.route);
     return (
       <div className="App">
         <div className="App-header">
@@ -72,7 +73,7 @@ class App extends Component {
             currentTodo={this.state.currentTodo}
           />
             <List
-              todos={this.state.todos}
+              todos={displayTodos}
               handleTogle={this.handleTogle}
               handleRemove={this.handleRemove}
             />
